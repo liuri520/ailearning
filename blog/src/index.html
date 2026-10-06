@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+  <title>博客</title>
+  <!--
+    主题预置必须用**普通脚本**（不是 module，不能内联）。
+    内联会被 CSP 的 script-src 'self' 拦掉；module 是延迟执行的，
+    等它跑起来已经闪过一帧白屏了。详见 src/public/theme-boot.js。
+  -->
+  <script src="./theme-boot.js"></script>
+</head>
+<body>
+  <div id="app"></div>
+  <noscript>
+    <p style="padding:2rem;font-family:sans-serif">
+      本站需要 JavaScript 才能浏览。你也可以直接订阅
+      <a href="./feed.php">RSS</a>。
+    </p>
+  </noscript>
+  <script type="module" src="./main.js"></script>
+</body>
+</html>

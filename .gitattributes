@@ -1,0 +1,20 @@
+# 换行符由 Git 统一规范化成 LF 存库。
+#
+# 服务器是 Linux、开发机是 Windows。不声明的话，换行符会随每个人的
+# core.autocrlf 设置漂移 —— 同一份文件在不同机器上 diff 出满屏噪声，
+# 而且这种噪声会混进真正的代码改动里，review 时很难看。
+# 存库一律 LF，检出时按平台来（默认行为，不强制）。
+* text=auto
+
+# 二进制文件必须显式标记：否则 Git 会试图对它们做换行符转换，
+# 结果是把文件内容改坏（图片打不开、字体加载失败）。
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.gif   binary
+*.webp  binary
+*.ico   binary
+*.woff  binary
+*.woff2 binary
+*.ttf   binary
+*.eot   binary

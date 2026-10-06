@@ -1,0 +1,419 @@
+/**
+ * public.css —— 前台专属样式
+ */
+
+/* ── 布局骨架 ───────────────────────────────────────────── */
+.site {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  height: var(--header-height);
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: 0 var(--space-4);
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: saturate(180%) blur(12px);
+  border-bottom: 1px solid var(--border-muted);
+}
+
+/* 不支持 color-mix 的老浏览器 → 用不透明背景兜底，别让文字叠在内容上 */
+@supports not (background: color-mix(in srgb, red 50%, blue)) {
+  .site-header { background: var(--bg); }
+}
+
+.site-header__inner {
+  width: 100%;
+  max-width: var(--page-width);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.brand {
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--text);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.brand:hover { text-decoration: none; }
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  margin-left: auto;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.nav::-webkit-scrollbar { display: none; }
+
+.nav__link {
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  white-space: nowrap;
+}
+
+.nav__link:hover {
+  background: var(--bg-subtle);
+  color: var(--text);
+  text-decoration: none;
+}
+
+.nav__link.is-active {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.site-main {
+  flex: 1;
+  width: 100%;
+  max-width: var(--page-width);
+  margin: 0 auto;
+  padding: var(--space-6) var(--space-4) var(--space-7);
+}
+
+.site-footer {
+  border-top: 1px solid var(--border-muted);
+  padding: var(--space-5) var(--space-4);
+  color: var(--text-faint);
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+.site-footer a { color: var(--text-muted); }
+
+/* ── 首页区块 ───────────────────────────────────────────── */
+.block {
+  margin-bottom: var(--space-7);
+}
+
+.block__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.block__title {
+  margin: 0;
+  font-size: 1.125rem;
+}
+
+.banner {
+  padding: var(--space-7) var(--space-4);
+  text-align: center;
+  border-radius: var(--radius-lg);
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-muted);
+  margin-bottom: var(--space-7);
+}
+
+.banner__title {
+  margin: 0 0 var(--space-2);
+  font-size: 2rem;
+}
+
+.banner__desc {
+  margin: 0;
+  color: var(--text-muted);
+  max-width: 34rem;
+  margin-inline: auto;
+}
+
+/* ── 内容卡片 ───────────────────────────────────────────── */
+.grid {
+  display: grid;
+  gap: var(--space-4);
+  grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+}
+
+.grid--wide {
+  grid-template-columns: repeat(auto-fill, minmax(21rem, 1fr));
+}
+
+.post-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-muted);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.post-card:hover {
+  border-color: var(--border);
+  box-shadow: var(--shadow-sm);
+}
+
+.post-card__cover {
+  display: block;
+  aspect-ratio: 16 / 9;
+  background: var(--bg-inset);
+  overflow: hidden;
+}
+
+.post-card__cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.post-card__body {
+  padding: var(--space-4);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.post-card__title {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+.post-card__title a { color: var(--text); }
+.post-card__title a:hover { color: var(--accent); text-decoration: none; }
+
+.post-card__summary {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  line-height: 1.6;
+  flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.post-card__meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+  font-size: 0.75rem;
+  color: var(--text-faint);
+}
+
+/* ── 详情页 ─────────────────────────────────────────────── */
+.detail {
+  max-width: var(--content-width);
+  margin: 0 auto;
+}
+
+.detail__title {
+  margin: 0 0 var(--space-3);
+  font-size: 1.875rem;
+}
+
+.detail__meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  color: var(--text-faint);
+  font-size: 0.8rem;
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--border-muted);
+  margin-bottom: var(--space-5);
+}
+
+/* .prose / .filters / .pager / .skeleton / .toast / .theme-toggle 已移到 base.css，
+   前后台共用（见那里的说明） */
+
+.detail__hero {
+  margin: 0 0 var(--space-5);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--bg-inset);
+}
+
+.detail__hero img { display: block; width: 100%; }
+
+/* ── 视频 ───────────────────────────────────────────────── */
+.video-frame {
+  position: relative;
+  width: 100%;
+  background: #000;
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: var(--space-5);
+}
+
+.video-frame iframe,
+.video-frame video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 0;
+}
+
+/* ── 标签云 ─────────────────────────────────────────────── */
+.tag-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.tag-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-1) var(--space-3);
+  border: 1px solid var(--border-muted);
+  border-radius: 999px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  background: var(--bg-subtle);
+}
+
+.tag-chip:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.tag-chip__count {
+  font-size: 0.7rem;
+  color: var(--text-faint);
+}
+
+/* 归档页用它当筛选按钮，需要与链接区分开 */
+button.tag-chip {
+  font-family: inherit;
+  border: 1px solid var(--border-muted);
+}
+
+.tag-chip.is-active {
+  border-color: var(--accent);
+  background: var(--accent-subtle);
+  color: var(--accent);
+}
+
+.tag-chip.is-active .tag-chip__count {
+  color: var(--accent);
+}
+
+/* ── 筛选栏的搜索框宽度由 base.css 给，这里只加建议下拉 ── */
+
+/* 搜索建议下拉 */
+.suggest {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  z-index: 30;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  max-height: 20rem;
+  overflow-y: auto;
+}
+
+.suggest__item {
+  display: block;
+  padding: var(--space-2) var(--space-3);
+  font-size: 0.875rem;
+  color: var(--text);
+  cursor: pointer;
+}
+
+.suggest__item:hover,
+.suggest__item.is-active {
+  background: var(--bg-subtle);
+  text-decoration: none;
+}
+
+/* ── 归档 ───────────────────────────────────────────────── */
+.archive-year {
+  margin-bottom: var(--space-5);
+}
+
+.archive-year__title {
+  font-size: 1rem;
+  margin: 0 0 var(--space-2);
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.archive-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.archive-list li {
+  display: flex;
+  gap: var(--space-3);
+  padding: var(--space-2) 0;
+  border-bottom: 1px solid var(--border-muted);
+  font-size: 0.9rem;
+}
+
+.archive-list__date {
+  color: var(--text-faint);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  flex-shrink: 0;
+  width: 3.5rem;
+}
+
+/* ── 图集瀑布流 ─────────────────────────────────────────── */
+.gallery-grid {
+  display: grid;
+  gap: var(--space-3);
+  grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+}
+
+.gallery-item {
+  position: relative;
+  display: block;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--bg-inset);
+  aspect-ratio: 1;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.gallery-item__caption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: var(--space-3);
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.75));
+  color: #fff;
+  font-size: 0.8rem;
+}
+
+@media (max-width: 640px) {
+  .site-main { padding: var(--space-4) var(--space-3) var(--space-6); }
+  .detail__title { font-size: 1.5rem; }
+  .banner { padding: var(--space-5) var(--space-4); }
+  .banner__title { font-size: 1.5rem; }
+  .grid { grid-template-columns: 1fr; }
+}

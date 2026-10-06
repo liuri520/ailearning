@@ -1,0 +1,43 @@
+# ── 本地配置：唯一含密钥的文件，绝不提交（SPEC §4.1）──
+config.php
+
+# ── 运行数据 ──
+# 目录内容全部忽略，但每个目录里的 index.html 是防目录列举的守卫（SPEC §9.4-4），
+# 必须提交 —— 否则新克隆下来的仓库里这几个目录是空的，服务器一列举就露文件名。
+data/cache/*
+!data/cache/index.html
+data/logs/*
+!data/logs/index.html
+data/export/*
+!data/export/index.html
+uploads/tmp/*
+!uploads/tmp/index.html
+!uploads/index.html
+!data/index.html
+!app/index.html
+
+# ── 前端构建 ──
+node_modules/
+dist/
+.vite/
+src/node_modules/
+
+# 构建产物散布到站点根（install/部署时由 dist/ 复制过来），也要忽略。
+# 加前导斜杠是必须的：`index.html` 会连 src/index.html 一起匹配掉，
+# 那是**源码**，被忽略掉就再也构建不出来了。
+assets/
+/index.html
+/panel.html
+/theme-boot.js
+
+# ── 安装后生成的随机后台入口 ──
+# install.php 把 panel-template.php 重命名成 panel-<8位随机串>.php（SPEC §9.1），
+# 那个随机串就是 config.php 里的 ADMIN_ENTRY。提交上来等于把后台地址公开，
+# 随机化也就白做了。模板本身要提交 —— 它是部署时的唯一来源。
+/panel-*.php
+!/panel-template.php
+
+# ── 编辑器 / 系统 ──
+.DS_Store
+Thumbs.db
+*.log
